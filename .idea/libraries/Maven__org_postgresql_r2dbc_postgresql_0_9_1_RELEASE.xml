@@ -1,0 +1,13 @@
+<component name="libraryTable">
+  <library name="Maven: org.postgresql:r2dbc-postgresql:0.9.1.RELEASE">
+    <CLASSES>
+      <root url="jar://$MAVEN_REPOSITORY$/org/postgresql/r2dbc-postgresql/0.9.1.RELEASE/r2dbc-postgresql-0.9.1.RELEASE.jar!/" />
+    </CLASSES>
+    <JAVADOC>
+      <root url="jar://$MAVEN_REPOSITORY$/org/postgresql/r2dbc-postgresql/0.9.1.RELEASE/r2dbc-postgresql-0.9.1.RELEASE-javadoc.jar!/" />
+    </JAVADOC>
+    <SOURCES>
+      <root url="jar://$MAVEN_REPOSITORY$/org/postgresql/r2dbc-postgresql/0.9.1.RELEASE/r2dbc-postgresql-0.9.1.RELEASE-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

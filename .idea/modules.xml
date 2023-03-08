@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/hngateway/hngateway.iml" filepath="$PROJECT_DIR$/hngateway/hngateway.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/hnservices.iml" filepath="$PROJECT_DIR$/.idea/hnservices.iml" />
+    </modules>
+  </component>
+</project>

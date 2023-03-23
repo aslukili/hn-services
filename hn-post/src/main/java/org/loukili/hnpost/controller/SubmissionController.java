@@ -10,6 +10,7 @@ import org.loukili.hnpost.entity.Submission;
 import org.loukili.hnpost.exception.SubmissionNotFoundException;
 import org.loukili.hnpost.service.SubmissionService;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -54,6 +55,8 @@ public class SubmissionController {
         return submissionService.deleteSubmission(postId);
     }
 
+
+
     @GetMapping("/{postId}/comments")
     @ResponseStatus(HttpStatus.OK)
     public List<Comment> getCommentsOfPost(@PathVariable String postId){
@@ -66,4 +69,7 @@ public class SubmissionController {
     public CommentResponse saveComment(@PathVariable String postId, @RequestBody CommentRequest commentRequest){
         return submissionService.addComment(postId, commentRequest);
     }
+    // TODO: update comment (probably this will be under CommentController class)
+    // TODO: delete comment (probably this will be under CommentController class)
+
 }

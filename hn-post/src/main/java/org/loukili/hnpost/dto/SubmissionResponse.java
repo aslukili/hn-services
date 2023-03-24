@@ -23,6 +23,7 @@ public class SubmissionResponse {
     private String title;
     private String url;
     private String description;
+    private List<String> tags;
     private List<String> comments;
     private int score;
     private int upVotes;

@@ -22,7 +22,6 @@ public class SubmissionServiceImpl implements SubmissionService{
     private final CommentService commentService;
     @Override
     public List<SubmissionResponse> getAll() {
-        // TODO: deleted submissions should not be returned!
         List<Submission> submissions = submissionRepository.findAll();
         return submissions.stream()
                 .map(Submission::toResponse)

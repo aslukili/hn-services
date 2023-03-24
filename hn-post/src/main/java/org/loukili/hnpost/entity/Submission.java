@@ -30,6 +30,7 @@ public class Submission {
     private String title;
     private String url;
     private String description;
+    private List<String> tags;
     private List<String> comments = new ArrayList<>();
     private int score = 0;
     private int upVotes = 0;
@@ -53,6 +54,7 @@ public class Submission {
                 .title(this.title)
                 .url(this.url)
                 .description(this.description)
+                .tags(this.tags)
                 .comments(this.comments)
                 .score(this.score)
                 .upVotes(this.upVotes)

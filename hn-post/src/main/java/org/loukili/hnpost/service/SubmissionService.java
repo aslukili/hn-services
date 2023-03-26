@@ -24,4 +24,6 @@ public interface SubmissionService {
     boolean deleteSubmission(String postId);
 
     CommentResponse addComment(String postId, CommentRequest commentRequest);
+
+    List<SubmissionResponse> getAllByPage(int page, int size);
 }

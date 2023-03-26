@@ -21,10 +21,16 @@ import java.util.List;
 @RequiredArgsConstructor
 public class SubmissionController {
     private final SubmissionService submissionService;
-    @GetMapping("")
+    @GetMapping("/get-all")
     @ResponseStatus(HttpStatus.OK)
     public List<SubmissionResponse> getAllSubmissions(){
         return submissionService.getAll();
+    }
+
+    @GetMapping("")
+    @ResponseStatus(HttpStatus.OK)
+    public List<SubmissionResponse> getAllSubmissionsByPage(@RequestParam int page, @RequestParam int size){
+        return submissionService.getAllByPage(page, size);
     }
 
 

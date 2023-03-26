@@ -8,6 +8,9 @@ import org.loukili.hnpost.dto.SubmissionResponse;
 import org.loukili.hnpost.entity.Submission;
 import org.loukili.hnpost.exception.SubmissionNotFoundException;
 import org.loukili.hnpost.repository.SubmissionRepository;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -76,6 +79,15 @@ public class SubmissionServiceImpl implements SubmissionService{
         submission.setDescendants(submission.getDescendants() + 1);
         submissionRepository.save(submission);
         return commentResponse;
+    }
+
+    @Override
+    public List<SubmissionResponse> getAllByPage(int page, int size) {
+        Pageable pageable = PageRequest.of(page, size);
+        Page<Submission> submissions = submissionRepository.findAll(pageable);
+        return submissions.stream()
+                .map(Submission::toResponse)
+                .collect(Collectors.toList());
     }
 
 }

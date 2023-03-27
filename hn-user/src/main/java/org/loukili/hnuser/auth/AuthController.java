@@ -1,16 +1,15 @@
 package org.loukili.hnuser.auth;
 
 import lombok.RequiredArgsConstructor;
+import org.loukili.hnuser.dto.ResponseDto;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
-import java.sql.SQLOutput;
+import javax.websocket.server.PathParam;
+
 
 @RestController
-@RequestMapping("/api/v1/auth")
+@RequestMapping("/api/v1/hn-user/auth")
 @RequiredArgsConstructor
 public class AuthController {
 
@@ -19,6 +18,7 @@ public class AuthController {
     @PostMapping("/register")
     public ResponseEntity<AuthResponse> register(
             @RequestBody RegisterRequest request) {
+        System.out.println("here");
         return ResponseEntity.ok(authenticationService.register(request));
     }
 
@@ -26,5 +26,11 @@ public class AuthController {
     public ResponseEntity<AuthResponse> login(
             @RequestBody AuthRequest request) {
         return ResponseEntity.ok(authenticationService.login(request));
+    }
+
+    // TODO: add a logout endpoint
+    @GetMapping("/validate-token")
+    public ResponseDto validateToken(@PathParam("token") String token){
+        return authenticationService.validateToken(token);
     }
 }

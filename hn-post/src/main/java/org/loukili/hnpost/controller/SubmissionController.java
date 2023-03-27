@@ -17,7 +17,7 @@ import java.util.List;
 
 
 @RestController
-@RequestMapping("api/v1/submissions")
+@RequestMapping("api/v1/hn-post/submissions")
 @RequiredArgsConstructor
 public class SubmissionController {
     private final SubmissionService submissionService;

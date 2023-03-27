@@ -33,7 +33,9 @@ public class SecurityConfig {
 //                .cors().configurationSource(corsConfigurationSource())
 //                .and()
                 .authorizeHttpRequests()
-                .antMatchers("/api/v1/auth/**").permitAll()
+                .antMatchers("/api/v1/hn-user/auth/**").permitAll()
+                // TODO: update the config for other services
+                .antMatchers("/api/v1/hn-post/**").hasAuthority("USER")
                 .antMatchers("/api/v1/admin/**").hasAuthority("ADMIN")
                 .antMatchers("/api/v1/**").hasAnyAuthority("ADMIN", "USER", "MODERATOR", "SUPER_USER")
                 .anyRequest()

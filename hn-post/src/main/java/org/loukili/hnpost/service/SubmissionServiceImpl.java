@@ -38,7 +38,6 @@ public class SubmissionServiceImpl implements SubmissionService{
 
     @Override
     public SubmissionResponse editSubmission(String postId, SubmissionRequest submissionRequest) {
-        // TODO: implement the method
         Submission submission = submissionRepository.findById(postId)
                 .orElseThrow(() -> new SubmissionNotFoundException(postId));
 

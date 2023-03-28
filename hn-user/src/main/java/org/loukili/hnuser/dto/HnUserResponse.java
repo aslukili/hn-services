@@ -2,14 +2,15 @@ package org.loukili.hnuser.dto;
 
 
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.loukili.hnuser.entity.Role;
 
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class HnUserDto {
+@Builder
+public class HnUserResponse {
     private Long id;
     private String username;
     private String fullName;

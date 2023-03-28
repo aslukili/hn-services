@@ -75,6 +75,7 @@ public class SubmissionController {
     public CommentResponse saveComment(@PathVariable String postId, @RequestBody CommentRequest commentRequest){
         return submissionService.addComment(postId, commentRequest);
     }
+
     // TODO: update comment (probably this will be under CommentController class)
     // TODO: delete comment (probably this will be under CommentController class)
 

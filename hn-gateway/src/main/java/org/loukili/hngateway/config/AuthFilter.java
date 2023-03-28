@@ -1,5 +1,6 @@
 package org.loukili.hngateway.config;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.loukili.hngateway.dto.HnUserDto;
 import org.loukili.hngateway.dto.ResponseDto;
 import org.loukili.hngateway.feign.UserClient;
@@ -14,10 +15,13 @@ import org.springframework.web.reactive.function.client.WebClient;
 public class AuthFilter extends AbstractGatewayFilterFactory<AuthFilter.Config> {
 
     private final WebClient.Builder webClientBuilder;
+    private final ObjectMapper objectMapper;
 
-    public AuthFilter(@Lazy UserClient userFeignClient, WebClient.Builder webClientBuilder) {
+
+    public AuthFilter(@Lazy UserClient userFeignClient, WebClient.Builder webClientBuilder, ObjectMapper objectMapper) {
         super(Config.class);
         this.webClientBuilder = webClientBuilder;
+        this.objectMapper = objectMapper;
     }
 
     @Override
@@ -30,7 +34,7 @@ public class AuthFilter extends AbstractGatewayFilterFactory<AuthFilter.Config> 
             String authHeader = exchange.getRequest().getHeaders().get(HttpHeaders.AUTHORIZATION).get(0);
             String[] parts = authHeader.split(" ");
             if (parts.length !=2 || !"Bearer".equals(parts[0])){
-                throw new RuntimeException("authorization no contains token");
+                throw new RuntimeException("Authorization doesn't have a Bearer token");
             }
 
             return webClientBuilder.build()
@@ -42,11 +46,12 @@ public class AuthFilter extends AbstractGatewayFilterFactory<AuthFilter.Config> 
                             new ResponseDto("bad request", response.getMessage());
                             throw new RuntimeException(response.getMessage());
                         }
+                        HnUserDto hnUserDto = objectMapper.convertValue(response.getData(), HnUserDto.class);
                         exchange.getRequest()
-                                .mutate() ;
+                                .mutate()
+                                .header("X-auth-user-id", String.valueOf(hnUserDto.getId()));
                         return exchange;
                     }).flatMap(chain::filter);
-
         };
     }
 

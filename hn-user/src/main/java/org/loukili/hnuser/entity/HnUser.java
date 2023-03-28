@@ -4,6 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.loukili.hnuser.dto.HnUserResponse;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.security.core.GrantedAuthority;
@@ -74,5 +75,18 @@ public class HnUser implements UserDetails {
     @Override
     public boolean isEnabled() {
         return true;
+    }
+
+    public HnUserResponse toResponse() {
+        return HnUserResponse.builder()
+                .id(this.id)
+                .username(this.username)
+                .fullName(this.fullName)
+                .email(this.email)
+                .karma(this.karma)
+                .role(this.role.name())
+                .about(this.about)
+                .isEmailNotPublic(this.isEmailNotPublic)
+                .build();
     }
 }

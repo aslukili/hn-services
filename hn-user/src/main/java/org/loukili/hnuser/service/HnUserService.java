@@ -21,4 +21,6 @@ public interface HnUserService {
     HnUserResponse editUser(Long userId, HnUserRequest userRequest);
 
     boolean deleteUser(Long userId);
+    boolean followUser(Long followerId, Long followeeId);
+    boolean unfollowUser(Long followerId, Long followeeId);
 }

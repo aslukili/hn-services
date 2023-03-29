@@ -68,10 +68,8 @@ public class HnUserServiceImpl implements HnUserService{
         if (userRequest.getAbout() != null) {
             user.setAbout(userRequest.getAbout());
         }
-
         return hnUserRepository.save(user).toResponse();
     }
-
     @Override
     public boolean deleteUser(Long userId) {
         HnUser user = hnUserRepository.findById(userId)
@@ -79,5 +77,47 @@ public class HnUserServiceImpl implements HnUserService{
 
         user.setNotBaned(false);
         return true;
+    }
+
+    @Override
+    public boolean followUser(Long followerId, Long followeeId) {
+        Optional<HnUser> userOptional = hnUserRepository.findById(followerId);
+        Optional<HnUser> followeeOptional = hnUserRepository.findById(followeeId);
+
+        if (userOptional.isPresent() && followeeOptional.isPresent()) {
+            HnUser user = userOptional.get();
+            HnUser followee = followeeOptional.get();
+
+            user.getFollowing().add(followee);
+            followee.getFollowers().add(user);
+
+            hnUserRepository.save(user);
+            hnUserRepository.save(followee);
+
+            return true;
+        }
+
+        return false;
+    }
+
+    @Override
+    public boolean unfollowUser(Long followerId, Long followeeId) {
+        Optional<HnUser> userOptional = hnUserRepository.findById(followerId);
+        Optional<HnUser> followeeOptional = hnUserRepository.findById(followeeId);
+
+        if (userOptional.isPresent() && followeeOptional.isPresent()) {
+            HnUser user = userOptional.get();
+            HnUser followee = followeeOptional.get();
+
+            user.getFollowing().remove(followee);
+            followee.getFollowers().remove(user);
+
+            hnUserRepository.save(user);
+            hnUserRepository.save(followee);
+
+            return true;
+        }
+
+        return false;
     }
 }

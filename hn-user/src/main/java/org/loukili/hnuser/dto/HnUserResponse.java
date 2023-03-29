@@ -5,6 +5,9 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.loukili.hnuser.entity.HnUser;
+
+import java.util.List;
 
 @Data
 @AllArgsConstructor
@@ -19,4 +22,6 @@ public class HnUserResponse {
     private String role;
     private String about;
     private boolean isEmailNotPublic;
+    private List<HnUser> followers;
+    private List<HnUser> following;
 }

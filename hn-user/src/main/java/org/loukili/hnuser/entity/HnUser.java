@@ -1,5 +1,7 @@
 package org.loukili.hnuser.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -13,8 +15,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
 import java.sql.Timestamp;
-import java.util.Collection;
-import java.util.List;
+import java.util.*;
 
 
 @Data
@@ -42,6 +43,19 @@ public class HnUser implements UserDetails {
     private Timestamp updatedAt;
 
     // TODO: add relation for following and followers
+    @ManyToMany(fetch = FetchType.LAZY)
+    @JoinTable(name = "user_followers",
+            joinColumns = @JoinColumn(name = "user_id"),
+            inverseJoinColumns = @JoinColumn(name = "follower_id"))
+    @JsonIgnore
+    private List<HnUser> followers = new ArrayList<>();
+
+    @ManyToMany(fetch = FetchType.LAZY)
+    @JoinTable(name = "user_following",
+            joinColumns = @JoinColumn(name = "user_id"),
+            inverseJoinColumns = @JoinColumn(name = "following_id"))
+    @JsonIgnore
+    private List<HnUser> following = new ArrayList<>();
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
@@ -87,6 +101,8 @@ public class HnUser implements UserDetails {
                 .role(this.role.name())
                 .about(this.about)
                 .isEmailNotPublic(this.isEmailNotPublic)
+                .followers(this.followers)
+                .following(this.following)
                 .build();
     }
 }

@@ -9,6 +9,8 @@ import org.loukili.hnuser.entity.HnUser;
 import org.loukili.hnuser.exception.UserNotFoundException;
 import org.loukili.hnuser.service.HnUserService;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -46,14 +48,14 @@ public class HnUserController {
         return user.toResponse();
     }
 
-    @GetMapping("/{userUsername}")
-    @ResponseStatus(HttpStatus.OK)
-    public HnUserResponse findUserByUsername(@PathVariable String userUsername){
-        HnUser user = hnUserService.findByUsername(userUsername)
-                .orElseThrow(() -> new UserNotFoundException(userUsername));
-
-        return user.toResponse();
-    }
+//    @GetMapping("/{userUsername}")
+//    @ResponseStatus(HttpStatus.OK)
+//    public HnUserResponse findUserByUsername(@PathVariable String userUsername){
+//        HnUser user = hnUserService.findByUsername(userUsername)
+//                .orElseThrow(() -> new UserNotFoundException(userUsername));
+//
+//        return user.toResponse();
+//    }
 
     @PutMapping("/{userId}")
     @ResponseStatus(HttpStatus.OK)
@@ -66,4 +68,24 @@ public class HnUserController {
     public boolean deleteSubmission(@PathVariable Long userId) {
         return hnUserService.deleteUser(userId);
     }
+
+    // TODO: follow and unfollow endpoints
+    @PostMapping("/{userId}/follow")
+    public ResponseEntity<?> followUser(@PathVariable Long userId, Authentication authentication){
+        Long followerId = ((HnUser) authentication.getPrincipal()).getId();
+        if (hnUserService.followUser(followerId, userId)){
+            return ResponseEntity.ok().build();
+        }
+        return ResponseEntity.badRequest().build();
+    }
+
+    @PostMapping("/{userId}/unfollow")
+    public ResponseEntity<?> unfollowUser(@PathVariable Long userId, Authentication authentication){
+        Long followerId = ((HnUser) authentication.getPrincipal()).getId();
+        if (hnUserService.followUser(followerId, userId)){
+            return ResponseEntity.ok().build();
+        }
+        return ResponseEntity.badRequest().build();
+    }
+
 }

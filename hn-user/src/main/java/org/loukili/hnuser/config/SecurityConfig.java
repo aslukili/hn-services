@@ -49,7 +49,6 @@ public class SecurityConfig {
         return http.build();
     }
 
-
     // TODO:  add cors configuration:
 //    @Bean
 //    public CorsConfigurationSource corsConfigurationSource() {

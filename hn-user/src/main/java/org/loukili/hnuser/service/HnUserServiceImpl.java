@@ -93,6 +93,8 @@ public class HnUserServiceImpl implements HnUserService{
 
             hnUserRepository.save(user);
             hnUserRepository.save(followee);
+            // TODO: send notification to followee
+            // produce a kafka topic to notify the followee that he has a new follower
 
             return true;
         }

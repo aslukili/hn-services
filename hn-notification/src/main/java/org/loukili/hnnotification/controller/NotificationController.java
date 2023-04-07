@@ -5,6 +5,7 @@ import lombok.RequiredArgsConstructor;
 import org.loukili.hnnotification.entity.Notification;
 import org.loukili.hnnotification.service.NotificationService;
 import org.springframework.http.HttpStatus;
+import org.springframework.kafka.annotation.KafkaListener;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -25,6 +26,7 @@ public class NotificationController {
     // TODO: save a notification
     @PostMapping("")
     @ResponseStatus(HttpStatus.CREATED)
+    @KafkaListener(topics = "newFollowerTopic")
     public Notification saveNotification(@RequestBody Notification notification){
         return notificationService.saveNotification(notification);
     }

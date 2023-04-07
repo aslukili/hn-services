@@ -69,8 +69,9 @@ public class HnUserController {
         return hnUserService.deleteUser(userId);
     }
 
-    // TODO: follow and unfollow endpoints
+
     @PostMapping("/{userId}/follow")
+    // TODO: the response entity should not be like this!
     public ResponseEntity<?> followUser(@PathVariable Long userId, Authentication authentication){
         Long followerId = ((HnUser) authentication.getPrincipal()).getId();
         if (hnUserService.followUser(followerId, userId)){

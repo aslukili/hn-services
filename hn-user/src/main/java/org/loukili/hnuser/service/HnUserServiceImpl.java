@@ -4,11 +4,13 @@ import lombok.RequiredArgsConstructor;
 import org.loukili.hnuser.dto.HnUserRequest;
 import org.loukili.hnuser.dto.HnUserResponse;
 import org.loukili.hnuser.entity.HnUser;
+import org.loukili.hnuser.event.NewFollowerEvent;
 import org.loukili.hnuser.exception.UserNotFoundException;
 import org.loukili.hnuser.repository.HnUserRepository;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -20,6 +22,8 @@ import java.util.stream.Collectors;
 @RequiredArgsConstructor
 public class HnUserServiceImpl implements HnUserService{
     private final HnUserRepository hnUserRepository;
+    private final KafkaTemplate<String, NewFollowerEvent> kafkaTemplate;
+
     @Override
     public List<HnUserResponse> getAll() {
         List<HnUser> users = hnUserRepository.findAll();
@@ -95,7 +99,7 @@ public class HnUserServiceImpl implements HnUserService{
             hnUserRepository.save(followee);
             // TODO: send notification to followee
             // produce a kafka topic to notify the followee that he has a new follower
-
+            kafkaTemplate.send("newFollowerTopic", new NewFollowerEvent(followee.getUsername(), user.getUsername() + "followed you"));
             return true;
         }
 

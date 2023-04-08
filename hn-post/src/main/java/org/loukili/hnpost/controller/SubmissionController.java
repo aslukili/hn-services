@@ -65,9 +65,9 @@ public class SubmissionController {
 
     @GetMapping("/{postId}/comments")
     @ResponseStatus(HttpStatus.OK)
-    public List<Comment> getCommentsOfPost(@PathVariable String postId){
+    public List<CommentResponse> getCommentsOfPost(@PathVariable String postId){
         // TODO: implement the method
-        return null;
+        return submissionService.getCommentsOfPost(postId);
     }
 
     @PostMapping("/{postId}/comments")

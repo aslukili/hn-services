@@ -27,6 +27,7 @@ public class Comment {
     private String post;
     private String parent; // parent is null if the comment is a top level comment
     private List<String> children = new ArrayList<>();
+    private int level = 0; // level = 0 if parent is null (first level comment) otherwise, level = parent level + 1
     private int score;
     private int upVotes;
     private int downVotes;
@@ -41,6 +42,7 @@ public class Comment {
                 .post(this.post)
                 .parent(this.parent)
                 .children(this.children)
+                .level(this.level)
                 .score(this.score)
                 .upVotes(this.upVotes)
                 .downVotes(this.downVotes)

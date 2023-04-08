@@ -19,6 +19,7 @@ public class CommentResponse {
     private String post;
     private String parent; // parent is null if the comment is a top level comment
     private List<String> children;
+    private int level;
     private int score;
     private int upVotes;
     private int downVotes;

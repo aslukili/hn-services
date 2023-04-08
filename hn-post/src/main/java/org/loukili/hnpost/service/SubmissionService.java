@@ -5,6 +5,7 @@ import org.loukili.hnpost.dto.CommentRequest;
 import org.loukili.hnpost.dto.CommentResponse;
 import org.loukili.hnpost.dto.SubmissionRequest;
 import org.loukili.hnpost.dto.SubmissionResponse;
+import org.loukili.hnpost.entity.Comment;
 import org.loukili.hnpost.entity.Submission;
 import org.springframework.stereotype.Service;
 
@@ -26,4 +27,6 @@ public interface SubmissionService {
     CommentResponse addComment(String postId, CommentRequest commentRequest);
 
     List<SubmissionResponse> getAllByPage(int page, int size);
+
+    List<CommentResponse> getCommentsOfPost(String postId);
 }

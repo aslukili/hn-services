@@ -11,4 +11,6 @@ public interface CommentService {
     CommentResponse saveComment(CommentRequest commentRequest);
 
     List<CommentResponse> getAll();
+
+    List<CommentResponse> getCommentsOfPost(String postId);
 }

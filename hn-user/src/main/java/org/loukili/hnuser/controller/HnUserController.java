@@ -2,7 +2,6 @@ package org.loukili.hnuser.controller;
 
 
 import lombok.RequiredArgsConstructor;
-import org.loukili.hnuser.auth.RegisterRequest;
 import org.loukili.hnuser.dto.HnUserRequest;
 import org.loukili.hnuser.dto.HnUserResponse;
 import org.loukili.hnuser.entity.HnUser;
@@ -20,12 +19,12 @@ import java.util.List;
 @RequiredArgsConstructor
 public class HnUserController {
     private final HnUserService hnUserService;
+
     @GetMapping("/get-all")
     @ResponseStatus(HttpStatus.OK)
     public List<HnUserResponse> getAllUsers(){
         return hnUserService.getAll();
     }
-
 
     @GetMapping("")
     @ResponseStatus(HttpStatus.OK)

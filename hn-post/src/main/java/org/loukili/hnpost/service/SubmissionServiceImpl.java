@@ -89,4 +89,9 @@ public class SubmissionServiceImpl implements SubmissionService{
                 .collect(Collectors.toList());
     }
 
+    @Override
+    public List<CommentResponse> getCommentsOfPost(String postId) {
+        return commentService.getCommentsOfPost(postId);
+    }
+
 }

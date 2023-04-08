@@ -40,4 +40,12 @@ public class CommentServiceImpl implements CommentService{
                 .map(Comment::toResponse)
                 .collect(Collectors.toList());
     }
+
+    @Override
+    public List<CommentResponse> getCommentsOfPost(String postId) {
+        List<Comment> comments = commentRepository.findCommentsByPost(postId);
+        return comments.stream()
+                .map(Comment::toResponse)
+                .collect(Collectors.toList());
+    }
 }

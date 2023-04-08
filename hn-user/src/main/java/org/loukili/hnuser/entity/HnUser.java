@@ -38,9 +38,9 @@ public class HnUser implements UserDetails {
     private boolean isEmailNotPublic = true;
     private boolean isNotBaned = true;
     @CreatedDate
-    private Timestamp createdAt;
+    private Date createdAt = new Date();
     @LastModifiedDate
-    private Timestamp updatedAt;
+    private Date updatedAt;
 
     // TODO: add relation for following and followers
     @ManyToMany(fetch = FetchType.LAZY)

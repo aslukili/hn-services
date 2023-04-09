@@ -29,4 +29,6 @@ public interface SubmissionService {
     List<SubmissionResponse> getAllByPage(int page, int size);
 
     List<CommentResponse> getCommentsOfPost(String postId);
+
+    List<SubmissionResponse> findByAuthor(String username);
 }

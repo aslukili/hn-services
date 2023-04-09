@@ -46,11 +46,12 @@ public class VoteServiceImpl implements VoteService{
         if (UPVOTE.equals(voteRequest.getVoteType())) {
             submission.setUpVotes(submission.getUpVotes() + 1);
             submission.setScore(submission.getScore() + 1);
+            // feign call to update the user's karma
+
         } else {
             submission.setDownVotes(submission.getDownVotes() + 1);
             submission.setScore(submission.getScore() - 1);
         }
-
         submissionRepository.save(submission);
     }
 

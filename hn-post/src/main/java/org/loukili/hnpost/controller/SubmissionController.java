@@ -49,6 +49,13 @@ public class SubmissionController {
         return submission.toResponse();
     }
 
+    // get submissions of a particular user
+    @GetMapping("/user/{username}")
+    @ResponseStatus(HttpStatus.OK)
+    public List<SubmissionResponse> getSubmissionsOfUser(@PathVariable String username){
+        return submissionService.findByAuthor(username);
+    }
+
     @PutMapping("/{postId}")
     @ResponseStatus(HttpStatus.OK)
     public SubmissionResponse editSubmission(@PathVariable String postId, @RequestBody SubmissionRequest submissionRequest){

@@ -32,6 +32,14 @@ public class SubmissionServiceImpl implements SubmissionService{
     }
 
     @Override
+    public List<SubmissionResponse> findByAuthor(String username) {
+        List<Submission> submissions = submissionRepository.findSubmissionsByAuthorUsername(username);
+        return submissions.stream()
+                .map(Submission::toResponse)
+                .collect(Collectors.toList());
+    }
+
+    @Override
     public SubmissionResponse saveSubmission(SubmissionRequest submissionRequest) {
         return submissionRepository.save(submissionRequest.toSubmission()).toResponse();
     }
@@ -93,5 +101,7 @@ public class SubmissionServiceImpl implements SubmissionService{
     public List<CommentResponse> getCommentsOfPost(String postId) {
         return commentService.getCommentsOfPost(postId);
     }
+
+
 
 }

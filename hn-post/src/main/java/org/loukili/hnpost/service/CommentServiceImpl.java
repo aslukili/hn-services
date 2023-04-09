@@ -20,12 +20,16 @@ public class CommentServiceImpl implements CommentService{
     @Override
     public CommentResponse saveComment(CommentRequest commentRequest) {
         // TODO: if commentRequest.parent is not null, then add the comment as a child to the parent
+        Comment commentToSave = commentRequest.toComment();
 
         Comment parentComment = null;
         if (commentRequest.getParent() != null){
             parentComment = commentRepository.findById(commentRequest.getParent()).orElse(null);
+            // level of comment = parent level + 1
+            assert parentComment != null;
+            commentToSave.setLevel(parentComment.getLevel()+1);
         }
-        CommentResponse commentResponse = commentRepository.save(commentRequest.toComment()).toResponse();
+        CommentResponse commentResponse = commentRepository.save(commentToSave).toResponse();
         if (parentComment != null) {
             parentComment.getChildren().add(commentResponse.getId());
             commentRepository.save(parentComment);

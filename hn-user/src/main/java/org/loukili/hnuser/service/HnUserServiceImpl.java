@@ -126,4 +126,17 @@ public class HnUserServiceImpl implements HnUserService{
 
         return false;
     }
+
+    @Override
+    public boolean incrementKarma(String username) {
+        // get the user by username
+        Optional<HnUser> userOptional = hnUserRepository.findByUsername(username);
+        if (userOptional.isPresent()) {
+            HnUser user = userOptional.get();
+            user.setKarma(user.getKarma()+1);
+            hnUserRepository.save(user);
+            return true;
+        }
+        return false;
+    }
 }

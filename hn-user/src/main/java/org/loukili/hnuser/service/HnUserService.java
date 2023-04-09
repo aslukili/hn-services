@@ -23,4 +23,6 @@ public interface HnUserService {
     boolean deleteUser(Long userId);
     boolean followUser(Long followerId, Long followeeId);
     boolean unfollowUser(Long followerId, Long followeeId);
+
+    boolean incrementKarma(String username);
 }

@@ -38,11 +38,11 @@ public class HnUserController {
         return hnUserService.saveUser(userRequest);
     }
 
-    @GetMapping("/{userId}")
+    @GetMapping("/{username}")
     @ResponseStatus(HttpStatus.OK)
-    public HnUserResponse findUserById(@PathVariable Long userId){
-        HnUser user = hnUserService.findById(userId)
-                .orElseThrow(() -> new UserNotFoundException(userId.toString()));
+    public HnUserResponse findUserByUsername(@PathVariable String username){
+        HnUser user = hnUserService.findByUsername(username)
+                .orElseThrow(() -> new UserNotFoundException(username));
 
         return user.toResponse();
     }
@@ -60,6 +60,15 @@ public class HnUserController {
     @ResponseStatus(HttpStatus.OK)
     public HnUserResponse editSubmission(@PathVariable Long userId, @RequestBody HnUserRequest userRequest){
         return hnUserService.editUser(userId, userRequest);
+    }
+
+    @PutMapping("/{username}/karma")
+    @ResponseStatus(HttpStatus.OK)
+    public  ResponseEntity<?> incrementKarma(@PathVariable String username){
+        if (hnUserService.incrementKarma(username)){
+            return ResponseEntity.ok().build();
+        }
+        return ResponseEntity.badRequest().build();
     }
 
     @DeleteMapping("/{userId}")
@@ -82,7 +91,7 @@ public class HnUserController {
     @PostMapping("/{userId}/unfollow")
     public ResponseEntity<?> unfollowUser(@PathVariable Long userId, Authentication authentication){
         Long followerId = ((HnUser) authentication.getPrincipal()).getId();
-        if (hnUserService.followUser(followerId, userId)){
+        if (hnUserService.unfollowUser(followerId, userId)){
             return ResponseEntity.ok().build();
         }
         return ResponseEntity.badRequest().build();

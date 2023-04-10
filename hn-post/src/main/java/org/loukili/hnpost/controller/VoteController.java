@@ -10,6 +10,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.servlet.http.HttpServletRequest;
+
 @RestController
 @RequestMapping("/api/v1/hn-post/votes")
 @AllArgsConstructor
@@ -17,9 +19,10 @@ public class VoteController {
     private final VoteService voteService;
 
     @PostMapping
-    public ResponseEntity<Void> vote(@RequestBody VoteRequest voteRequest) {
+    public ResponseEntity<Void> vote(@RequestBody VoteRequest voteRequest, HttpServletRequest request) {
         // TODO: voteRequest does not have the voterUsername by default, i should be able to get it from the Header
-        voteService.vote(voteRequest);
+        String authToken = request.getHeader("Authorization");
+        voteService.vote(voteRequest, authToken);
         return new ResponseEntity<>(HttpStatus.OK);
     }
 }

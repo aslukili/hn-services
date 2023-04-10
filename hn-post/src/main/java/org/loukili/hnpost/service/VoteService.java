@@ -5,5 +5,5 @@ import org.springframework.stereotype.Service;
 
 @Service
 public interface VoteService {
-    void vote(VoteRequest voteRequest);
+    void vote(VoteRequest voteRequest, String authToken);
 }

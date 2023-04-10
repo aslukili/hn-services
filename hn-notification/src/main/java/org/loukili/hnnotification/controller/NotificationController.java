@@ -38,8 +38,15 @@ public class NotificationController {
     public List<Notification> getAllNotificationsByUserUsername(@PathVariable String userUsername){
         return notificationService.getAllNotificationsByUserUsername(userUsername);
     }
+
+
+
+    @PutMapping("/{notification}")
+    @ResponseStatus(HttpStatus.CREATED)
+    public Notification readNotification(@PathVariable Long notification) {
+        return notificationService.readNotification(notification);
+    }
     // TODO: get not read notifications of a user
 
-    // TODO: get notifications of a user by page
     // TODO: get notifications of authenticated user (extract username from request)
 }

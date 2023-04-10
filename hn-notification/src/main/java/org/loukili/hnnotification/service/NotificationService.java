@@ -10,4 +10,6 @@ public interface NotificationService {
     Notification saveNotification(Notification notification);
 
     List<Notification> getAllNotificationsByUserUsername(String userUsername);
+
+    Notification readNotification(Long notification);
 }

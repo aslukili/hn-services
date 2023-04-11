@@ -34,7 +34,7 @@ public class SecurityConfig {
 //                .and()
                 .authorizeHttpRequests()
                 .antMatchers("/api/v1/hn-user/auth/**").permitAll()
-                .antMatchers("/api/v1/hn-post/**").hasAuthority("USER")
+                .antMatchers("/api/v1/hn-post/**").permitAll()
                 .antMatchers("/api/v1/admin/**").hasAuthority("ADMIN")
                 .antMatchers("/api/v1/**").hasAnyAuthority("ADMIN", "USER", "MODERATOR", "SUPER_USER")
                 .anyRequest()

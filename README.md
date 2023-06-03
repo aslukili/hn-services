@@ -32,7 +32,7 @@
 - ✔️ **[`Angular`](https://angular.io/)** - A TypeScript-based open-source framework for building web applications. 
 
 ## System Architecture
-![Image](./Screenshot from 2023-06-03 12-21-17.png)
+![Image](./sys-arch.png)
 ![](./)
 
 ## How to run

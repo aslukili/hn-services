@@ -37,3 +37,20 @@
 
 ## How to run
 
+### requirement:
+
+*   Java version 17
+*   Docker and docker compose
+*   postgresql (you can run it in a docker container)
+
+### Steps:
+
+*   Clone the repo: `git clone` [`https://github.com/aslukili/hn-services`](https://github.com/aslukili/hn-services)
+*   run MongoDB docker image: `docker run -d -p 27017:27017 --name=hn-post mongo`
+*   if you already have postgres installed, configure the .properties properties of each service that uses postures (user and notification services)
+*   run kafka and zookeeper from docker compose: `docker compose up`
+*   run the rest of the services individually using Maven.
+*   run the front-end part: `git clone` [`https://github.com/aslukili/hn`](https://github.com/aslukili/hn) `&& cd hn && ng serve`
+*   Open the full-stack app in your browser at `http://localhost:4200`
+*   The app is barely working :)
+

@@ -33,7 +33,7 @@
 
 ## System Architecture
 
-![](./system-architecture-diagram.png)
+![](./Screenshot from 2023-06-03 12-21-17.png)
 
 ## How to run
 
